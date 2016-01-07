@@ -1,0 +1,145 @@
+<!--引用静态文件-->
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title></title>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.ui-1.9.0.min.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrapValidator.min.js' %}"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrapValidator.min.css' %}" />
+
+    <!-- Bootstrap theme -->
+    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+{% block body %}
+    {% block innerscript %}
+        <script>
+            //<!--将form中的值转换为键值对。-->
+            function getFormJson(frm) {
+                var o = {};
+                var a = $(frm).serializeArray();
+                $.each(a, function () {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+
+                return o;
+            }
+
+            //<!--将form转为AJAX提交。-->
+            function ajaxSubmit(frm, fn) {
+                var dataPara = getFormJson(frm);
+                var ajax_para={};
+                ajax_para['data']=dataPara;
+                if (!frm.attr('action') ){
+                    ajax_para['url']=this.location.pathname;
+                }
+                else{
+                    ajax_para['url']=frm.attr('action');
+                }
+                ajax_para['type']=frm.attr('method');
+                if (!frm.attr('method')){
+                    ajax_para['type']='GET';
+                }
+
+                if (fn) {
+                    ajax_para['success']=fn;
+                }
+                htmlobj=$.ajax(ajax_para);
+                return htmlobj;
+            }
+
+            $(document).ready(
+                    function() {
+                        //<!--using jQuery,设置ajax的头部都带有csrf验证-->
+                        var csrftoken = $.cookie('csrftoken');
+
+                        function csrfSafeMethod(method) {
+                            // these HTTP methods do not require CSRF protection
+                            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                        }
+
+                        $.ajaxSetup({
+                            data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+                        });
+
+
+                    });
+            {% block onscript %}
+
+            {% endblock %}
+        </script>
+    {% endblock %}
+
+    <div name='main_page' class="container-fluid none-padding">
+        <div name='page_header' class="row">
+            {% block page_header %}
+                <div class="row hearder ">
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                    </div>
+                    <div class=" col-sm-5 col-md-5 col-lg-5">
+                        <div class="box" style="padding-left: 15px">
+                            <img src="{% static 'img/XXX.png' %}" class="logo" height="30px" >
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+        <div name='page_main' class="row" >
+            {% block  center_column %}
+            {% endblock %}
+        </div>
+
+        {% block  page_footer %}
+            <div class="footer-bj">
+                <div class="footer">
+                    <div class="footer-nav">
+                        <ul>
+                            <li>
+                                <h3>关注我们</h3>
+                                <img src="{% static 'img/wx.jpg' %}">
+                                <a href=""><img src="{% static 'img/weibo.jpg' %}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="company-foot">
+                    </div>
+
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+{% block modal %}
+{% endblock %}
+</body>
+</html>

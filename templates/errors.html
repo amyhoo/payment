@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% block  center_column %}
+    <div class="row" style="height: 50px"></div>
+    <div class="row" style="height: 300px">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        </div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <h1>
+                {% if errors %}
+                    {{ errors }}
+                {% else %}
+                    "出错!"
+                {% endif %}
+            </h1>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+<!--其他样式表-->
+{% block innerscript %}
+    <!-- -->
+    <link rel="stylesheet" href="{% static 'css/pay_logo.css' %}" />
+    {{ block.super }}
+    <script>
+        function combosubmit()
+        {
+            //s_data=$('form').serialize();
+            $('#myModal').modal();
+            //$('#paymentform').submit();
+            //return false;
+            //htmlobj=ajaxSubmit($('#paymentform'));
+            //$("#myModal").html(htmlobj.responseText);
+        }
+        function refreshsubmit()
+        {
+            $("#paymentform").bootstrapValidator('disableSubmitButtons',false);
+        }
+
+        $(document).ready(function() {
+            var bootstrapValidator=$('#paymentform').bootstrapValidator({
+                fields: {
+                    cash_amount: {
+                        message: '',
+                        validators: {
+                            notEmpty: {
+                                message: '请输入大于或等于50的数字'
+                            },
+                            regexp: {
+                                regexp: /^[0-9]\d*(\.[0-9]{1,2})?$/,
+                                message: '两位小数格式'
+                            },
+                            greaterThan:{
+                                value:50.00,
+                                message: '单笔充值金额最少 ¥50，若充值金额大于 ¥ 10000请使用银行转账'
+                            }
+                        }
+                    }
+                },
+                submitHandler: function(validator, form, submitButton) {
+                }
+            });
+            $('#paymentform').bootstrapValidator('validateField', "cash_amount");
+        });
+        $(function () {
+            $('#myModal').on('hide.bs.modal', function () {
+                $("#paymentform").bootstrapValidator('disableSubmitButtons',false);
+            })})
+    </script>
+{% endblock %}
+{% block onscript %}
+
+{% endblock %}
+{% block center_column %}
+    <div class="row main-region">
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="row h1">
+                <div class="col-lg-12">
+                    <h1 >账户充值</h1>
+                    {{account_id}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 150px">
+        <div class="tab-region" >
+            <ul class="nav nav-pills" role="tablist" style="padding-left: 9% ;background-color: #f1f5f8">
+                <li role="presentation" class="active ab-center"><a href="#online_pay" role="tab" data-toggle="tab">在线充值</a></li>
+                <li role="presentation" class="ab-center"><a href="#remittance"  role="tab" data-toggle="tab">转账汇款</a></li>
+            </ul>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="tab-content" style="padding-top:30px;background-color:#FFFFFF ">
+                    <div role="tabpanel" class="tab-pane active" id="online_pay">
+                        <h2>账户余额:
+                            <font style="color: #3d89d4">
+                                {{ user_info.user_balance }}元
+                            </font>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;账户:
+                            <font style="color: #fdb82f">
+                                {{ user_info.username }}
+                            </font>
+                        </h2>
+                        <form id='paymentform' class="form-horizontal" action="{{root_url}}/payment/submit" method="post" target="_blank" onsubmit="return combosubmit();">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="hidden" name="user_account_id" value="{{ user_info.user_account_id }}">
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                        <label for="inputmoney" class="control-label" style="color: #666;height: 40px ">充值金额</label>
+                                </div>
+                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                    <div class="input-group">
+                                        <input class="form-control" id="inputmoney" type="text"  name="cash_amount" value="50.00" style="height:40px">
+                                        <span class="input-group-addon">元&nbsp;</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1 col-md-1 col-lg-1" style="padding-top:15px">
+                                    <label style="color: #666 ">充值方式</label>
+                                </div>
+                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                    <div class="row" >
+                                        <div class ="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                                            <div class="radio">
+                                                <label class="pay_logo alipay_direct" >
+                                                    <input type="radio" name="pay_method" id="optionsRadios1" value="alipay_direct" checked>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding: 10px">
+                                        {% for current_bank in netbank %}
+                                            <div class ="col-xs-6 col-sm-4 col-md-4 col-lg-3" style="padding: 5px">
+                                                <div class="radio">
+                                                    <label class="pay_logo {{current_bank}}" >
+                                                        <input type="radio" name="pay_method" id="optionsRadios1" value="{{ current_bank }}">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="row" style="padding: 10px">
+                                        <button type="submit" class="btn btn-warning btn-lg ">支付</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="remittance" >
+                        <div class="row" >
+                        </div>
+                        <div class="row" style="background-color: #9acfea ;font-size: 14px;color:#ffffff;padding: 20px 20px 10px 20px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--tab控件-->
+
+
+{% endblock %}
+{% block modal %}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" style="margin-top: 100px">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#222222;color: #ffffff">
+                    <button type="button" class="close" data-dismiss="modal" onclick="" aria-label="Close" style="color:#ffffff"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">支付情况</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>注意:支付完成后再点击</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" onclick="location.reload();">支付成功</button>
+                    <button type="button" class="btn btn-default" onclick="" data-dismiss="modal">支付失败</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}

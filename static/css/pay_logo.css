@@ -1,0 +1,94 @@
+{% load staticfiles %}
+.pay_logo {
+    display: inline-block;
+    width: 150px;
+    height: 38px;
+    vertical-align: middle;
+    background: #FFF url("../img/bank-icons.png") no-repeat scroll 0% 0%;
+    cursor: pointer;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+}
+
+/*支付宝*/
+.pay_logo.alipay_direct {
+    background-position: 30px -946px;
+}
+/*中国银行,类名与conf中银行定义一致*/
+.pay_logo.alipay_netbank_BOCB2C {
+    background-position: 30px -108px;
+}
+/*工商银行*/
+.pay_logo.alipay_netbank_ICBCB2C {
+    background-position: 20px -504px;
+}
+/*招商银行*/
+.pay_logo.alipay_netbank_CMB {
+    background-position: 30px -288px;
+}
+/*建设银行*/
+.pay_logo.alipay_netbank_CCB {
+    background-position: 20px -144px;
+}
+/*农业银行*/
+.pay_logo.alipay_netbank_ABC {
+    background-position: 20px 0px;
+}
+/*浦发银行*/
+.pay_logo.alipay_netbank_SPDB {
+    background-position: 30px -756px;
+}
+/*兴业银行*/
+.pay_logo.alipay_netbank_CIB {
+    background-position: 20px -216px;
+}
+/*广东发展银行*/
+.pay_logo.alipay_netbank_GDB {
+    background-position: 15px -432px;
+}
+/*富滇银行*/
+.pay_logo.alipay_netbank_FDB {
+    background-position: 35px -396px;
+}
+/*杭州银行*/
+.pay_logo.alipay_netbank_HZCBB2C {
+    background-position: 30px -468px;
+}
+/*上海银行*/
+.pay_logo.alipay_netbank_SHBANK {
+    background-position: 30px -648px;
+}
+/*宁波银行*/
+.pay_logo.alipay_netbank_NBBANK {
+    background-position: 30px -540px;
+}
+/*平安银行*/
+.pay_logo.alipay_netbank_SPABANK {
+    background-position: 25px -720px;
+}
+/*中国邮政储蓄银行 meiy */
+.pay_logo.alipay_netbank_POSTGC {
+    background-position: 25px -720px;
+}
+/*民生银行*/
+.pay_logo.alipay_netbank_CMBC {
+    background-position: 20px -324px;
+}
+/*交通银行*/
+.pay_logo.alipay_netbank_COMM {
+    background-position: 30px -360px;
+}
+/*中信银行*/
+.pay_logo.alipay_netbank_CITIC-DEBIT {
+    background-position: 25px -252px;
+}
+/*光大银行*/
+.pay_logo.alipay_netbank_CEB-DEBIT {
+    background-position: 20px -180px;
+}
+
+/*北京农商银行*/
+.pay_logo.alipay_netbank_BJRCB {
+    background-position: 15px -72px;
+}
+

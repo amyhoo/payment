@@ -1,0 +1,146 @@
+/*顶栏*/
+.hearder{height: 70px; background: #0d0d0d; width: 100%;font-size:15px; }
+
+/*主题*/
+.main-region{ background: #f1f5f8; width: 100%;}
+
+/*标签页内部的区域*/
+.tab-region{ background: #fdfbff; width: 100%;}
+
+
+/*页面底部*/
+.footer-bj{ height:400px; background:#333333; width: 100%;}
+.footer{ width: 1050px; margin: 0 auto; overflow: hidden;}
+.footer .footer-nav{ width: 800px; float: left; overflow: hidden; }
+.footer-nav ul li{float: left; width: 86px; margin-right:38px;}
+.footer-nav ul li h3{ font-size: 16px; color: #cccccc; padding-top: 90px; padding-bottom:12px;}
+.footer-nav ul li a{ color: #b2b3ae; display: block; padding-bottom: 8px;}
+.footer .company-foot{ float:left; width: 220px;}
+.company-foot img{ margin-top:90px;}
+.company-foot p{ color: #cccccc; text-align: center; line-height: 1.5em; margin-top: 15px;}
+.footer span{ clear: both; display: block; padding-top:28px; text-align: center;color: #cccccc;}
+.footer span a{color: #cccccc;}
+
+.iframe-box{width: 100%;}
+.iframe-box iframe{width: 100%; border: none; overflow: hidden;}
+.mian-box{overflow: hidden;}
+
+
+.none-padding {
+    padding: 0 !important;
+}
+.box {
+
+    /*非IE的主流浏览器识别的垂直居中的方法*/
+    display: table-cell;
+    vertical-align:middle;
+    /*设置水平居中*/
+    text-align:left;
+    /* 针对IE的Hack */
+    *display: block;
+    *font-size: 35px;/*约为高度的0.873，200*0.873 约为175*/
+    *font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
+    width:170px;
+    height:70px;
+    border: 0px solid #eee;
+}
+
+.box img {
+    /*设置图片垂直居中*/
+    vertical-align:middle;
+
+}
+.h1 ,h1{padding-bottom: 10px;font-size: 26px;}
+.h2 ,h2{padding-bottom: 10px;font-size: 18px;}
+.h3 ,h3{font-size: 14px;}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus  {
+    color: #333;
+    background-color: #fff;
+    font-size: 18px;
+    width: 150px;
+    height:55px;
+}
+
+.nav-pills > li{
+    float: left;
+    font-size: 18px;
+    width: 150px;
+    height:55px;
+    text-align: center;
+}
+
+.nav-pills > li > a {
+    border-radius: 4px;
+    padding-top: 20px;
+}
+.nav-pills > li + li {
+    margin-left: 2px;
+}
+
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"],
+.radio input[type="radio"],
+.radio-inline input[type="radio"]{
+    position: absolute;
+    margin-top: 4px \9;
+    margin: 10px 0px 0px -42px;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: 8px 40px;
+    border-radius: 3px;
+    margin-top: 20px;
+
+}
+
+.table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+    border-bottom-width:0px
+}
+.row{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.text-center a{
+    font-size: 12px;
+}
+
+.text-center span{
+    font-size: 12px;
+}
+ol, ul{
+    list-style: outside none none;
+}
+.modal-footer{
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #f0f0f0;
+    background-color: #f7f7f5;
+    -webkit-box-shadow: 0px 1px 0px #fff inset;
+}
+.close{
+    opacity:1;
+}
+
+.table thead tr th{
+    font-size: 20px;
+    padding: 38px 0px;
+    font-weight: normal;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.table tbody tr td{
+    color: #888;
+    padding-left: 0px;
+}
+
+.nav-tabs li.bv-tab-success > a {
+    padding-top: 20px;
+    color: #3c763d;
+
+}
+.nav-tabs li.bv-tab-error > a {
+    padding-top: 20px;
+    color: #a94442;
+}
